@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+
+	<include file="$(find gazebo_ros)/launch/empty_world.launch">
+		<arg name="debug" value="false" />
+		<arg name="gui" value="true" />
+		<arg name="paused" value="false"/>
+		<arg name="use_sim_time" value="true"/>
+		<arg name="headless" value="false"/>
+	</include>
+
+    <!-- <param name="robot_description" command="cat '$(find rosbots_description)/urdf/rosbots.xacro'" /> -->
+	<param name="robot_description" command="cat '$(find robot_test)/urdf/test.urdf'"/>
+
+    <arg name="x" default="0"/>
+    <arg name="y" default="0"/>
+    <arg name="z" default="0.5"/>
+
+    <!-- <node name="mybot_spawn" pkg="gazebo_ros" type="spawn_model" output="screen" args="-urdf -param robot_description -model test" /> -->
+    <node name="mybot_spawn" pkg="gazebo_ros" type="spawn_model" output="screen" args="-urdf -param robot_description -model test -x $(arg x) -y $(arg y) -z $(arg z)" />
+
+      <!-- push robot_description to factory and spawn robot in gazebo -->
+  <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
+
+  <!-- <arg name="paused" default="false"/> -->
+  <!-- <arg name="use_sim_time" default="true"/> -->
+  <!-- <arg name="gui" default="true"/> -->
+  <!-- <arg name="headless" default="false"/> -->
+  <!-- <arg name="debug" default="false"/> -->
+  <!-- <arg name="model" default="$(find urdf_tutorial)/urdf/08-macroed.urdf.xacro"/> -->
+
+
+  <!-- <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" args="-z 1.0 -unpause -urdf -model robot -param robot_description" respawn="false" output="screen" /> -->
+
+  <!-- <node pkg="robot_state_publisher" type="robot_state_publisher"  name="robot_state_publisher">
+    <param name="publish_frequency" type="double" value="30.0" />
+  </node> -->
+ 
+</launch>
